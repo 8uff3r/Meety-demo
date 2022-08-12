@@ -1,5 +1,5 @@
 <template>
-  <div class="justify-center row www no-wrap" id="cc-slides">
+  <div id="cc-slides" class="justify-center row www no-wrap">
     <div
       v-for="banner in banners"
       :key="banner.id"
@@ -8,10 +8,10 @@
     >
       <q-img
         fit="cover"
-        @mouseenter="toggle(banner.id)"
         class="i3"
         :alt="banner.alt"
         :src="banner.fname"
+        @mouseenter="toggle(banner.id)"
       />
     </div>
   </div>
@@ -34,18 +34,18 @@ const banners = ref([
   {
     id: 0,
     fname: "/src/assets/img/pexels-andy-barbour-6684550.jpg",
-    alt: "reading",
+    alt: "reading"
   },
   {
     id: 1,
     fname: "/src/assets/img/pexels-guduru-ajay-bhargav-1076081.jpg",
-    alt: "hiking",
+    alt: "hiking"
   },
   {
     id: 2,
     fname: "/src/assets/img/pexels-marcin-dampc-1684187.jpg",
-    alt: "festival",
-  },
+    alt: "festival"
+  }
 ]);
 const is8 = ref([true, false, false]);
 function toggle(i) {

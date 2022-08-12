@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/require-prop-types -->
 <template>
   <div v-for="(value, key) in prompt" :key="key" :class="{ dark: dark }">
     <q-dialog
@@ -70,14 +71,17 @@
 
 <script setup>
 import { QSpinnerGears } from "quasar";
+import { ref } from "vue";
+import { useQuasar } from "quasar";
 
 //Props
+// eslint-disable-next-line vue/require-prop-types
 const props = defineProps(["msg", "dark"]);
 const prompt = ref(props.msg);
 const dark = ref(false);
 const auth = ref([
   { model: "", label: "Username" },
-  { model: "", label: "Password" },
+  { model: "", label: "Password" }
 ]);
 // Login Spinner
 const $q = useQuasar();
@@ -86,7 +90,7 @@ function loggingIn() {
     message: "Logging in...",
     progress: true, // we enable default settings
     persistent: true, // we want the user to not be able to close it
-    ok: false, // we want the user to not be able to close it
+    ok: false // we want the user to not be able to close it
   });
 
   // we simulate some progress here...
@@ -96,7 +100,7 @@ function loggingIn() {
 
     // we update the dialog
     dialog.update({
-      message: `Logging in... ${percentage}%`,
+      message: `Logging in... ${percentage}%`
     });
 
     // if we are done, we're gonna close it

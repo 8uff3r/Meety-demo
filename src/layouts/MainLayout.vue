@@ -39,16 +39,16 @@
               :ripple="false"
               icon="language"
               label="English"
-              @click="lsd.state = true"
               :class="{ 'text-black': !DarkMode }"
               class="hidden sm:inline-flex"
+              @click="lsd.state = true"
             />
             <div class="flex flex-nowrap">
               <div v-for="(value, key) in prompt" :key="key">
                 <q-btn
+                  :id="key"
                   flat
                   :ripple="false"
-                  :id="key"
                   :label="value.message"
                   @click="prompt[key].state = true"
                 />
@@ -77,7 +77,7 @@ const $q = useQuasar();
 
 const prompt = ref({
   login: { state: false, message: "Login", alt: "Not registered?" },
-  signup: { state: false, message: "Sign Up", alt: "Already have an account?" },
+  signup: { state: false, message: "Sign Up", alt: "Already have an account?" }
 });
 const loading = ref(false);
 // const CurrentLanguage = ref("English");
