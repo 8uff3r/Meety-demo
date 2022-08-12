@@ -1,0 +1,12 @@
+// app global css in Scss form
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: InterWeb;
+  src: url("/src/assets/InterWeb/Inter-Regular.woff");
+}
+* {
+  font-family: InterWeb;
+}
