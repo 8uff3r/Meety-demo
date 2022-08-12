@@ -1,31 +1,30 @@
 <template>
-  <div id="cc-slides" class="justify-center row www no-wrap">
+  <div class="flex flex-row justify-center overflow-hidden rounded-3xl no-wrap">
     <div
       v-for="banner in banners"
       :key="banner.id"
-      class="inner"
-      :class="[is8[banner.id] ? 'col-8' : 'col-3']"
+      class="transition-all duration-500 ease-out"
+      :class="[is8[banner.id] ? 'basis-2/3' : 'basis-1/4']"
     >
       <q-img
         fit="cover"
-        class="i3"
+        class="h-[500px] rounded-3xl"
         :alt="banner.alt"
         :src="banner.fname"
         @mouseenter="toggle(banner.id)"
       />
     </div>
   </div>
-  <h4 class="mt-6 ml-10 text-2xl">See what’s happening</h4>
-  <pre>
-z
-z
-z
-z
-z
-z
-z
-z
-  </pre>
+  <h4 class="my-6 text-lg font-extrabold sm:ml-10 sm:text-4xl">
+    See what’s happening
+  </h4>
+  <div class="flex justify-start">
+    <div v-for="(value, key) in intervals" :key="key">
+      <q-btn rounded class="m-2 text-xs text-white bg-blue" :ripple="false">{{
+        value
+      }}</q-btn>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -52,23 +51,19 @@ function toggle(i) {
   [is8.value[0], is8.value[1], is8.value[2]] = [false, false, false];
   is8.value[i] = true;
 }
+let intervals = [
+  "Starting soon",
+  "Today",
+  "Tomorrow",
+  "Thiss week",
+  "Online",
+  "In person",
+  "Trending near you"
+];
 </script>
 
 <style lang="scss">
-.www {
-  width: 100%;
-  height: 60%;
-  overflow: hidden;
-}
-.i3 {
-  height: 500px;
-  border-radius: 20px;
-}
-
 .inner {
   transition: width 500ms ease-out;
-}
-#cc-slides {
-  border-radius: 20px;
 }
 </style>

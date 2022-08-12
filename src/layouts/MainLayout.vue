@@ -58,7 +58,7 @@
         </q-toolbar>
       </q-header>
 
-      <q-page-container class="my-[100px] mx-[12%] pt-0">
+      <q-page-container class="sm:my-[50px] mx-[12%] pt-0">
         <router-view />
       </q-page-container>
       <!-- Components: -->
@@ -83,7 +83,8 @@ const loading = ref(false);
 // const CurrentLanguage = ref("English");
 const lsd = ref({ state: false });
 
-const DarkMode = ref(false);
+const DarkMode = ref(true);
+$q.dark.set(true);
 </script>
 
 <style lang="scss">
