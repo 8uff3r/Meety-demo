@@ -1,5 +1,5 @@
 <template>
-  <q-dialog transition-show="fade" transition-hide="fade" v-model="input.state">
+  <q-dialog v-model="input.state" transition-show="fade" transition-hide="fade">
     <q-card class="flex flex-col">
       <q-card-section class="q-pb-sm">
         <div class="text-h6">Choose your language</div>
@@ -8,8 +8,8 @@
       <q-card-section>
         <div class="flex flex-row space-x-10 [&>*]:flex p-1">
           <q-radio
-            class="flex flex-row"
             v-model="language"
+            class="flex flex-row"
             checked-icon="task_alt"
             unchecked-icon="panorama_fish_eye"
             val="line"

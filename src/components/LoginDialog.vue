@@ -35,7 +35,7 @@
           <q-card-actions align="center" class="text-primary">
             <q-btn
               id="loginBtnDialog"
-              color="orange"
+              color="primary"
               :label="value.message"
               type="submit"
               :loading="submitting"

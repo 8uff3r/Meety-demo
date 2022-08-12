@@ -10,3 +10,26 @@
 * {
   font-family: InterWeb;
 }
+.body--dark {
+  #login {
+    color: white;
+  }
+  #signup {
+    background-color: white;
+    color: black;
+  }
+}
+.body--light {
+  #login {
+    color: black;
+  }
+  #signup {
+    background-color: black;
+    color: white;
+  }
+}
+@layer components {
+  .headings {
+    @apply my-6 text-lg font-extrabold sm:ml-10 sm:text-3xl;
+  }
+}

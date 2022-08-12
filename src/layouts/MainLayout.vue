@@ -88,25 +88,10 @@ $q.dark.set(true);
 </script>
 
 <style lang="scss">
-.body--dark {
-  #login {
-    color: white;
+.q-layout,
+.q-dialog {
+  .q-btn .q-focus-helper {
+    display: none;
   }
-  #signup {
-    background-color: white;
-    color: black;
-  }
-}
-.body--light {
-  #login {
-    color: black;
-  }
-  #signup {
-    background-color: black;
-    color: white;
-  }
-}
-.q-btn .q-focus-helper {
-  display: none;
 }
 </style>
