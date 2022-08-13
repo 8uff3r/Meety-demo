@@ -60,7 +60,7 @@ module.exports = configure(function (/* ctx */) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // publicPath: "/Meety-vue/",
+      publicPath: "/Meety-vue/",
       // analyze: true,
       // env: {},
       // rawDefine: {}
@@ -70,7 +70,7 @@ module.exports = configure(function (/* ctx */) {
       // distDir
 
       extendViteConf (viteConf) {
-        base:"Meety-vue"
+        base:"/Meety-vue/"
       },
       // viteVuePluginOptions: {},
 
