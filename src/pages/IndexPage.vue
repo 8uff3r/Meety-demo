@@ -32,24 +32,35 @@
   </div>
   <div class="headings">Upcoming online events</div>
   <swiper
-    :slides-per-view="4.5"
-    :space-between="0"
+    :loop-fill-group-with-blank="false"
+    :space-between="10"
+    :grab-cursor="true"
     :modules="modules"
+    :loop="false"
+    :pagination="false"
+    slides-per-view="auto"
     :slides-per-group="4"
-    :loop="true"
-    :loop-fill-group-with-blank="true"
+    :breakpoints="swiperOptions.breakpoints"
+    disabled-class="hidden"
     :navigation="true"
-    class="flex flex-row gap-4 overflow-scroll flex-nowrap snaps"
+    class="flex flex-row gap-4 overflow-hidden flex-nowrap snaps"
   >
-    <swiper-slide v-for="(event, key) in UpcomingEvents" :key="key">
-      <q-card :id="key" class="w-64 bg-transparent no-shadow rounded-3xl">
+    <swiper-slide
+      v-for="(event, key) in UpcomingEvents"
+      :key="key"
+      class="w-[265px]"
+    >
+      <q-card
+        :id="key"
+        class="h-[400px] w-full bg-transparent no-shadow rounded-3xl"
+      >
         <img
           class="rounded-3xl"
           src="/src/assets/img/pexels-andy-barbour-6684550.jpg"
         />
         <q-card-section>
-          <div class="text-h6">{{ event }}</div>
-          <div class="text-subtitle2">by John Doe</div>
+          <div class="text-base">{{ event }}</div>
+          <div class="text-xs">by John Doe</div>
         </q-card-section>
         <q-card-section>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
@@ -57,6 +68,7 @@
       </q-card>
     </swiper-slide>
   </swiper>
+  {{ screenSize }}
 </template>
 
 <script setup>
@@ -70,7 +82,7 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import "swiper/scss/scrollbar";
-
+const screenSize = window.screen.width;
 const banners = ref([
   {
     id: 0,
@@ -113,21 +125,61 @@ let UpcomingEvents = [
   "INFP, Introverts, Shy and International Friends Hang out and Chat",
   "Establishing Your Business Entity"
 ];
-const onSwiper = (swiper) => {
-  console.log(swiper);
-};
-const onSlideChange = () => {
-  console.log("slide change");
-};
 const modules = [Pagination, Navigation];
+const slide = ref("style");
+
+const lorem =
+  "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque voluptatem totam, architecto cupiditate officia rerum, error dignissimos praesentium libero ab nemo.";
+const swiperOptions = ref({
+  breakpoints: {
+    300: {
+      slidesPerGroup: 1
+    },
+    1537: {
+      slidesPerGroup: 4
+    }
+  }
+});
+// Swiper.scrollbar.desstroy();
 </script>
 <style lang="scss">
 // .snaps {
 //   scroll-snap-type: inline mandatory;
 //   scroll-padding-inline: 1rem;
 // }
-
 // .snaps > * {
 //   scroll-snap-align: start;
 // }
+// .swiper-button-next,
+// .swiper-button-prev {
+//   box-shadow: 10px 10px 10px 10px lightblue;
+//   border-radius: 100%;
+// }
+.swiper-button-next::after,
+.swiper-rtl .swiper-button-prev::after {
+  // content: url("src/asslets/img/arrow_right.svg");
+  content: "chevron_right";
+  border-radius: 100%;
+  background-color: white;
+  box-shadow: 0px 0px 6px black;
+}
+.swiper-button-prev::after,
+.swiper-rtl .swiper-button-next::after {
+  content: "chevron_left";
+  border-radius: 100%;
+  background-color: white;
+  box-shadow: 0px 0px 6px black;
+}
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-family: "Material Icons";
+  font-size: 30px;
+  text-transform: none !important;
+  letter-spacing: 0;
+  font-variant: initial;
+  line-height: 1;
+}
+.swiper-button-disabled {
+  display: none;
+}
 </style>
