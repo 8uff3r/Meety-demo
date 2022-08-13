@@ -54,7 +54,7 @@ module.exports = configure(function (/* ctx */) {
       },
 
       vueRouterMode: "hash", // available values: 'hash', 'history'
-      vueRouterBase:"/Meety-vue/",
+      // vueRouterBase:"/Meety-vue/",
       // vueDevtools,
       // vueOptionsAPI: false,
 
