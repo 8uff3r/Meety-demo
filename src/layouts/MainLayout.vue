@@ -71,8 +71,8 @@
 <script setup>
 import { ref } from "vue";
 import { useQuasar } from "quasar";
-import LoginDialog from "/src/components/LoginDialog.vue";
-import LSDialog from "/src/components/LSDialog.vue";
+import LoginDialog from "components/LoginDialog.vue";
+import LSDialog from "components/LSDialog.vue";
 const $q = useQuasar();
 
 const prompt = ref({

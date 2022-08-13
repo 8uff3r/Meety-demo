@@ -54,10 +54,7 @@
         :id="key"
         class="h-[400px] w-full bg-transparent no-shadow rounded-3xl"
       >
-        <img
-          class="rounded-3xl"
-          src="/src/assets/img/pexels-andy-barbour-6684550.jpg"
-        />
+        <img class="rounded-3xl" src="img/pexels-andy-barbour-6684550.jpg" />
         <q-card-section>
           <div class="text-base">{{ event }}</div>
           <div class="text-xs">by John Doe</div>
@@ -86,17 +83,17 @@ const screenSize = window.screen.width;
 const banners = ref([
   {
     id: 0,
-    fname: "/src/assets/img/pexels-andy-barbour-6684550.jpg",
+    fname: "img/pexels-andy-barbour-6684550.jpg",
     alt: "reading"
   },
   {
     id: 1,
-    fname: "/src/assets/img/pexels-guduru-ajay-bhargav-1076081.jpg",
+    fname: "img/pexels-guduru-ajay-bhargav-1076081.jpg",
     alt: "hiking"
   },
   {
     id: 2,
-    fname: "/src/assets/img/pexels-marcin-dampc-1684187.jpg",
+    fname: "img/pexels-marcin-dampc-1684187.jpg",
     alt: "festival"
   }
 ]);

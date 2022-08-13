@@ -12,7 +12,7 @@
         <q-card-section>
           <q-img
             id="acc-img"
-            src="/src/assets/img/account-icon.png"
+            src="img/account-icon.png"
             spinner-color="primary"
             spinner-size="82px"
           />
