@@ -53,14 +53,14 @@ module.exports = configure(function (/* ctx */) {
         node: "node16",
       },
 
-      vueRouterMode: "history", // available values: 'hash', 'history'
-      // vueRouterBase,
+      vueRouterMode: "hash", // available values: 'hash', 'history'
+      vueRouterBase:"/Meety-vue/",
       // vueDevtools,
       // vueOptionsAPI: false,
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      publicPath: '/Meety-vue/',
+      publicPath: "/Meety-vue/",
       // analyze: true,
       // env: {},
       // rawDefine: {}
