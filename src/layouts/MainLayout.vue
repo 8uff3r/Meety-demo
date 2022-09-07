@@ -76,35 +76,33 @@ import { useQuasar } from "quasar";
 import { LoginDialog, LSDialog, ProfileDropDown } from "components";
 import { useUsersStore } from "src/stores/store";
 import { storeToRefs } from "pinia";
-const store = useUsersStore();
-const $q = useQuasar();
-const { isUserLoggedIn, user } = storeToRefs(store);
-const lsd = ref({
-  state: false
-});
-const prompt = ref({
-  login: {
-    state: false,
-    message: "Login",
-    type: "login",
-    alt: "Not registered?"
-  },
-  signup: {
-    state: false,
-    message: "Sign Up",
-    type: "register",
-    alt: "Already have an account?"
-  }
-});
-const profileInput = ref({ state: false });
-const loading = ref(false);
-
-const DarkMode = ref(true);
+const store = useUsersStore(),
+  $q = useQuasar(),
+  { isUserLoggedIn, user } = storeToRefs(store),
+  lsd = ref({
+    state: false
+  }),
+  prompt = ref({
+    login: {
+      state: false,
+      message: "Login",
+      type: "login",
+      alt: "Not registered?"
+    },
+    signup: {
+      state: false,
+      message: "Sign Up",
+      type: "register",
+      alt: "Already have an account?"
+    }
+  }),
+  profileInput = ref({ state: false }),
+  loading = ref(false),
+  DarkMode = ref(true),
+  logger = (i) => {
+    console.log(i);
+  };
 $q.dark.set(true);
-
-const logger = (i) => {
-  console.log(i);
-};
 </script>
 
 <style lang="scss">

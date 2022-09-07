@@ -96,30 +96,28 @@ import { useUsersStore } from "stores/store";
 import { storeToRefs } from "pinia";
 import { setCssVar } from "quasar";
 
-const store = useUsersStore();
-const username = ref(store.user.username);
-const tab = ref("mails");
-const { color } = storeToRefs(store);
-const colorBtnToggleModel = ref("red");
-const router = useRouter();
-const route = useRoute();
-
-const setColor = (i) => {
-  switch (i) {
-    case "red":
-      return "#b91c1c";
-    case "blue":
-      return "#388698";
-    case "green":
-      return "#0dbc79";
-  }
-};
-
-const logout = () => {
-  store.setToken(null);
-  store.setUser(null);
-  // router.push({ name: "index" });
-};
+const store = useUsersStore(),
+  username = ref(store.user.username),
+  tab = ref("mails"),
+  { color } = storeToRefs(store),
+  colorBtnToggleModel = ref("red"),
+  router = useRouter(),
+  route = useRoute(),
+  setColor = (i) => {
+    switch (i) {
+      case "red":
+        return "#b91c1c";
+      case "blue":
+        return "#388698";
+      case "green":
+        return "#0dbc79";
+    }
+  },
+  logout = () => {
+    store.setToken(null);
+    store.setUser(null);
+    // router.push({ name: "index" });
+  };
 
 watch(colorBtnToggleModel, () => {
   store.setColor(setColor(colorBtnToggleModel.value));
