@@ -1,13 +1,15 @@
 <template>
   <div
-    class="flex flex-row justify-center overflow-hidden rounded-3xl flex-nowrap"
+    class="flex flex-row justify-start overflow-hidden rounded-3xl flex-nowrap"
   >
     <div
       v-for="banner in banners"
       :key="banner.id"
       class="transition-all duration-500 ease-out"
       :class="[
-        is8[banner.id] ? 'basis-full sm:basis-2/3' : 'basis-0 sm:basis-1/4'
+        is8[banner.id]
+          ? 'basis-full sm:basis-2/3'
+          : 'basis-0 sm:basis-1/5 sm:w-[500px]'
       ]"
     >
       <q-img
@@ -19,7 +21,7 @@
       />
     </div>
   </div>
-  <h4 class="headings">See what’s happening</h4>
+  <h4 class="headings">See what's happening</h4>
   <div class="flex justify-start">
     <div v-for="(value, key) in intervals" :key="key">
       <q-btn
@@ -34,7 +36,6 @@
   <swiper
     :loop-fill-group-with-blank="false"
     :space-between="10"
-    :grab-cursor="true"
     :modules="modules"
     :loop="false"
     :pagination="false"
@@ -56,7 +57,9 @@
       >
         <img class="rounded-3xl" src="img/pexels-andy-barbour-6684550.jpg" />
         <q-card-section>
-          <div class="text-base">{{ event }}</div>
+          <button class="text-base" @click="showEventDialog.state = true">
+            {{ event }}
+          </button>
           <div class="text-xs">by John Doe</div>
         </q-card-section>
         <q-card-section>
@@ -65,11 +68,12 @@
       </q-card>
     </swiper-slide>
   </swiper>
-  {{ screenSize }}
+  <EventDialog :show-event-dialog="showEventDialog" />
 </template>
 
 <script setup>
 import { ref } from "vue";
+import EventDialog from "src/components/EventDialog.vue";
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 // Import Swiper Vue.js components
@@ -79,7 +83,6 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import "swiper/scss/scrollbar";
-const screenSize = window.screen.width;
 const banners = ref([
   {
     id: 0,
@@ -137,21 +140,10 @@ const swiperOptions = ref({
     }
   }
 });
-// Swiper.scrollbar.desstroy();
+
+const showEventDialog = ref({ state: false });
 </script>
 <style lang="scss">
-// .snaps {
-//   scroll-snap-type: inline mandatory;
-//   scroll-padding-inline: 1rem;
-// }
-// .snaps > * {
-//   scroll-snap-align: start;
-// }
-// .swiper-button-next,
-// .swiper-button-prev {
-//   box-shadow: 10px 10px 10px 10px lightblue;
-//   border-radius: 100%;
-// }
 .swiper-button-next::after,
 .swiper-rtl .swiper-button-prev::after {
   // content: url("src/asslets/img/arrow_right.svg");

@@ -9,12 +9,12 @@
                 class="text-4xl font-[Lalezar] font-bold sm:font-normal"
                 to="/"
               >
-                MEETY
+                meety
               </div>
             </div>
 
             <span
-              class="text-5xl sm:text-6xl font-extrabold md:font-[Helvetica] italic ml-[-4px]"
+              class="text-5xl sm:text-6xl font-extrabold md:font-[Helvetica] italic ml-[-10px]"
               >!</span
             >
           </q-toolbar-title>
@@ -43,11 +43,12 @@
               class="hidden sm:inline-flex"
               @click="lsd.state = true"
             />
-            <div class="flex flex-nowrap">
+            <div v-if="!isUserLoggedIn" class="flex flex-row flex-nowrap">
               <div v-for="(value, key) in prompt" :key="key">
                 <q-btn
                   :id="key"
-                  flat
+                  :flat="!(key == 'signup')"
+                  :color="key == 'signup' ? 'primary' : null"
                   :ripple="false"
                   :label="value.message"
                   @click="prompt[key].state = true"
@@ -55,6 +56,7 @@
               </div>
             </div>
           </div>
+          <ProfileDropDown v-if="isUserLoggedIn" />
         </q-toolbar>
       </q-header>
 
@@ -62,7 +64,7 @@
         <router-view />
       </q-page-container>
       <!-- Components: -->
-      <LoginDialog :msg="prompt" :dark="DarkMode" />
+      <LoginDialog v-if="!isUserLoggedIn" :msg="prompt" :dark="DarkMode" />
       <LSDialog :input="lsd" />
     </div>
   </q-layout>
@@ -71,20 +73,38 @@
 <script setup>
 import { ref } from "vue";
 import { useQuasar } from "quasar";
-import LoginDialog from "components/LoginDialog.vue";
-import LSDialog from "components/LSDialog.vue";
+import { LoginDialog, LSDialog, ProfileDropDown } from "components";
+import { useUsersStore } from "src/stores/store";
+import { storeToRefs } from "pinia";
+const store = useUsersStore();
 const $q = useQuasar();
-
-const prompt = ref({
-  login: { state: false, message: "Login", alt: "Not registered?" },
-  signup: { state: false, message: "Sign Up", alt: "Already have an account?" }
+const { isUserLoggedIn, user } = storeToRefs(store);
+const lsd = ref({
+  state: false
 });
+const prompt = ref({
+  login: {
+    state: false,
+    message: "Login",
+    type: "login",
+    alt: "Not registered?"
+  },
+  signup: {
+    state: false,
+    message: "Sign Up",
+    type: "register",
+    alt: "Already have an account?"
+  }
+});
+const profileInput = ref({ state: false });
 const loading = ref(false);
-// const CurrentLanguage = ref("English");
-const lsd = ref({ state: false });
 
 const DarkMode = ref(true);
 $q.dark.set(true);
+
+const logger = (i) => {
+  console.log(i);
+};
 </script>
 
 <style lang="scss">

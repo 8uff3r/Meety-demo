@@ -17,17 +17,17 @@ export default defineComponent({
   <div class="q-pa-md row www">
     <div :class="{ 'col-4': is4, 'col-8': !is4 }">
       <q-img
-        @mouseenter="change1"
         class="rounded-borders full-height"
         src="https://cdn.quasar.dev/img/mountains.jpg"
+        @mouseenter="change1"
       />
     </div>
     <div class="col">
       <q-img
-        @mouseenter="change2"
         :class="{ 'col-4': !is4, 'col-8': is4 }"
         class="rounded-borders full-height"
         src="https://cdn.quasar.dev/img/parallax1.jpg"
+        @mouseenter="change2"
       />
     </div>
   </div>

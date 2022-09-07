@@ -5,7 +5,6 @@
       v-model="value.state"
       transition-show="fade"
       transition-hide="fade"
-      persistent
       align="center"
     >
       <q-card style="min-width: 350px" :class="{ 'bg-black': dark }">
@@ -20,13 +19,14 @@
         <q-card-section>
           <div class="text-h6">Please enter your credentials</div>
         </q-card-section>
-        <form class="q-pa-md" @submit.prevent="simulateSubmit">
+        <form class="q-pa-md" @submit.prevent="sign(value.type)">
           <div v-for="(item, index) in auth" :key="index">
             <q-card-section class="q-pt-none">
               <q-input
                 v-model="item.model"
                 dense
                 autofocus
+                :type="item.type"
                 :label="item.label"
                 @keyup.enter="value.state = false"
               />
@@ -47,6 +47,7 @@
               </template>
             </q-btn>
           </q-card-actions>
+          <span class="text-red-600">{{ error }}</span>
           <q-card-actions align="center" class="text-primary">
             <q-btn id="cancel" v-close-popup rounded flat label="Cancel" />
           </q-card-actions>
@@ -70,66 +71,53 @@
 </template>
 
 <script setup>
-import { QSpinnerGears } from "quasar";
 import { ref } from "vue";
-import { useQuasar } from "quasar";
+import { useRouter, useRoute } from "vue-router";
+import AuthenticationService from "src/services/AuthenticationService";
+import { useUsersStore } from "stores/store";
 
-//Props
-// eslint-disable-next-line vue/require-prop-types
-const props = defineProps(["msg", "dark"]);
-const prompt = ref(props.msg);
-const dark = ref(false);
-const auth = ref([
-  { model: "", label: "Username" },
-  { model: "", label: "Password" }
-]);
-// Login Spinner
-const $q = useQuasar();
-function loggingIn() {
-  const dialog = $q.dialog({
-    message: "Logging in...",
-    progress: true, // we enable default settings
-    persistent: true, // we want the user to not be able to close it
-    ok: false // we want the user to not be able to close it
-  });
-
-  // we simulate some progress here...
-  let percentage = 0;
-  const interval = setInterval(() => {
-    percentage = Math.min(100, percentage + Math.floor(Math.random() * 22));
-
-    // we update the dialog
-    dialog.update({
-      message: `Logging in... ${percentage}%`
-    });
-
-    // if we are done, we're gonna close it
-    if (percentage === 100) {
-      clearInterval(interval);
-      setTimeout(() => {
-        dialog.hide();
-      }, 350);
-    }
-  }, 500);
-}
-
-const submitting = ref(false);
-
-function simulateSubmit() {
-  submitting.value = true;
-  // Simulating a delay here.
-  // When we are done, we reset "submitting"
-  // Boolean to false to restore the
-  // initial state.
-  setTimeout(() => {
-    // delay simulated, we are done,
-    // now restoring submit to its initial state
+//Refs
+const store = useUsersStore(),
+  router = useRouter(),
+  route = useRoute(),
+  props = defineProps(["msg", "dark"]),
+  error = ref(null),
+  prompt = ref(props.msg),
+  dark = ref(false),
+  auth = ref([
+    { model: "", label: "Username", type: "null" },
+    { model: "", label: "Password", type: "password" }
+  ]),
+  submitting = ref(false),
+  setSubmit = () => {
     submitting.value = false;
-  }, 3000);
-}
-//Helper Functions
-</script>
+  },
+  sign = async (type) => {
+    try {
+      submitting.value = true;
+      error.value = "";
+      const response = await AuthenticationService[type]({
+        username: auth.value[0].model,
+        password: auth.value[1].model
+      });
+      store.setToken(response.data.token);
+      store.setUser(response.data.user);
+      setSubmit();
+      router.push({ name: "home" });
+      prompt.value.signup.state = false;
+      prompt.value.login.state = false;
+    } catch (err) {
+      try {
+        error.value = err.data.error;
+      } catch {
+        error.value = err;
+      }
 
+      // console.log(err);
+      submitting.value = false;
+    }
+  };
+</script>
 <style>
 #loginBtnDialog,
 #cancel {
