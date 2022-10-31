@@ -19,20 +19,18 @@
     color: black;
   }
   .swiper-button-prev::after,
-  .swiper-rtl .swiper-button-next::after, .swiper-button-next::after,
-  .swiper-rtl .swiper-button-prev::after{
-    background-color: black
-
+  .swiper-rtl .swiper-button-next::after,
+  .swiper-button-next::after,
+  .swiper-rtl .swiper-button-prev::after {
+    background-color: black;
   }
 }
-.body--light {
-  #login {
-    color: black;
-  }
-  #signup {
-    background-color: black;
-    color: white;
-  }
+.body--light #login {
+  color: black;
+}
+#signup {
+  background-color: black;
+  color: white;
 }
 @layer components {
   .headings {

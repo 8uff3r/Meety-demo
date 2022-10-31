@@ -3,7 +3,7 @@
     <div class="">
       <q-header class="static h-20 mt-5 bg-inherit">
         <q-toolbar class="flex flex-row items-center px-4 md:px-8">
-          <q-toolbar-title class="flex flex-row text-red-700">
+          <q-toolbar-title class="flex flex-row text-primary">
             <div class="flex flex-col justify-center mt-1">
               <div
                 class="text-4xl font-[Lalezar] font-bold sm:font-normal"

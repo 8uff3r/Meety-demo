@@ -9,16 +9,23 @@
       :class="[
         is8[banner.id]
           ? 'basis-full sm:basis-2/3'
-          : 'basis-0 sm:basis-1/5 sm:w-[500px]'
+          : 'basis-0 sm:basis-1/5 sm:w-[500px]',
       ]"
     >
       <q-img
         fit="cover"
-        class="h-[500px] rounded-3xl"
+        class="h-[500px] rounded-3xl text-2xl flex-center flex justify-center"
         :alt="banner.alt"
         :src="banner.fname"
         @mouseenter="toggle(banner.id)"
-      />
+      >
+        <div
+          v-if="is8[banner.id]"
+          class="flex transition-colors absolute-full text-subtitle2 flex-center"
+        >
+          <div class="">{{ banner.cap }}</div>
+        </div>
+      </q-img>
     </div>
   </div>
   <h4 class="headings">See what's happening</h4>
@@ -26,7 +33,7 @@
     <div v-for="(value, key) in intervals" :key="key">
       <q-btn
         rounded
-        class="m-2 text-xs text-white bg-red-700"
+        class="m-2 text-xs text-white bg-primary"
         :ripple="false"
         >{{ value }}</q-btn
       >
@@ -87,18 +94,21 @@ const banners = ref([
   {
     id: 0,
     fname: "img/pexels-andy-barbour-6684550.jpg",
-    alt: "reading"
+    alt: "reading",
+    cap: "Find people with the same interests",
   },
   {
     id: 1,
     fname: "img/pexels-guduru-ajay-bhargav-1076081.jpg",
-    alt: "hiking"
+    alt: "hiking",
+    cap: "Find people with the same interests",
   },
   {
     id: 2,
     fname: "img/pexels-marcin-dampc-1684187.jpg",
-    alt: "festival"
-  }
+    alt: "festival",
+    cap: "Find people with the same interests",
+  },
 ]);
 const is8 = ref([true, false, false]);
 function toggle(i) {
@@ -112,7 +122,7 @@ let intervals = [
   "Thiss week",
   "Online",
   "In person",
-  "Trending near you"
+  "Trending near you",
 ];
 let UpcomingEvents = [
   "Black Women's Writing Group",
@@ -123,7 +133,7 @@ let UpcomingEvents = [
   "Establishing Your Business Entity",
   "Black Women's Writing Group",
   "INFP, Introverts, Shy and International Friends Hang out and Chat",
-  "Establishing Your Business Entity"
+  "Establishing Your Business Entity",
 ];
 const modules = [Pagination, Navigation];
 const slide = ref("style");
@@ -133,12 +143,12 @@ const lorem =
 const swiperOptions = ref({
   breakpoints: {
     300: {
-      slidesPerGroup: 1
+      slidesPerGroup: 1,
     },
     1537: {
-      slidesPerGroup: 4
-    }
-  }
+      slidesPerGroup: 4,
+    },
+  },
 });
 
 const showEventDialog = ref({ state: false });
